@@ -177,11 +177,13 @@ function na_ad_post_title ( $title ) {
 
       // }
 
-      if ( $title == $post->post_title and !is_page() && $is_ad == 'on' ) {
+        if ( !is_page() && $is_ad == 'on' && in_the_loop() ) {
 
-        $title = '<span class="native-ad-indicator">' . $text . '</span> ' . $title;
+            $title = '<span class="native-ad-indicator">' . $text . '</span> ' . $title;
+        }
 
-      }
+
+      
   return $title;
 }
 
