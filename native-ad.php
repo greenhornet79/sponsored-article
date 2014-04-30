@@ -75,7 +75,7 @@ function na_admin_init() {
 
     add_settings_field(
         'na_text',                  
-        'Indicator Text',                         
+        'Sponsored Text',                         
         'na_text_input',  
         'na_opt',                         
         'na_general'       
@@ -83,7 +83,7 @@ function na_admin_init() {
 
      add_settings_field(
         'na_text_color',                  
-        'Indicator Text Color',                         
+        'Sponsored Text Color',                         
         'na_text_color_input',  
         'na_opt',                         
         'na_general'       
@@ -91,8 +91,16 @@ function na_admin_init() {
 
     add_settings_field(
         'na_color',                  
-        'Indicator Background Color',                         
+        'Sponsored Background Color',                         
         'na_color_input',  
+        'na_opt',                         
+        'na_general'       
+    );
+
+     add_settings_field(
+        'na_content_color',                  
+        'Post Background Color',                         
+        'na_content_color_input',  
         'na_opt',                         
         'na_general'       
     );
@@ -114,9 +122,17 @@ function na_text_color_input() {
 
 function na_color_input() {
 
-    $options = wp_parse_args( get_option( 'na_options' ), array('na_color' => ''));
+    $options = wp_parse_args( get_option( 'na_options' ), array('na_color' => '#000000'));
     $color = $options['na_color'];
     echo "<input class='color-picker' id='na_color' name='na_options[na_color]' value='$color'>";
+}
+
+function na_content_color_input() {
+
+    $options = wp_parse_args( get_option( 'na_options' ), array('na_content_color' => '#ffffff'));
+    $content_color = $options['na_content_color'];
+    echo "<input class='color-picker' id='na_content_color' name='na_options[na_content_color]' value='$content_color'>";
+
 }
 
 function na_validate_options( $input ) {
@@ -129,6 +145,8 @@ add_action( 'add_meta_boxes', 'na_meta_box_create' );
 function na_meta_box_create() {
 
 	add_meta_box( 'na-options', 'Native Ad Options', 'na_options_function', 'post', 'side', 'high' );
+
+    add_meta_box( 'na-options', 'Native Ad Options', 'na_options_function', 'article', 'side', 'high' );
 
 }
 
@@ -177,7 +195,7 @@ function na_ad_post_title ( $title ) {
 
       // }
 
-        if ( !is_page() && $is_ad == 'on' && in_the_loop() ) {
+        if ( !is_page() && $is_ad == 'on' && $title == $post->post_title ) {
 
             $title = '<span class="native-ad-indicator">' . $text . '</span> ' . $title;
         }
@@ -226,10 +244,14 @@ function na_ad_styles() {
 	$options = get_option( 'na_options' );
 	$color = $options['na_color'];
     $text_color = $options['na_text_color'];
+    $content_color = $options['na_content_color'];
 
 	?>
 	<style type="text/css" media="screen">
 		.native-ad-indicator { color: <?php echo $text_color; ?>; font-size: .8em; background: <?php echo $color; ?>; border-radius: 2px; padding: 0 2px; display: inline-block; z-index: 99;}
+        .native-ad-content {
+            background: <?php echo $content_color; ?>; padding: 10px;
+        }
 	</style>
 	<?php 
 }
