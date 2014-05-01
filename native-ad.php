@@ -3,7 +3,7 @@
  * Plugin Name: Native Ad
  * Plugin URI: http://endocreative.com
  * Description: Add native ad functionality to your site by marking posts as sponsored
- * Version: 1.0
+ * Version: 1.01
  * Author: Endo Creative
  * Author URI: http://endocreative.com
  * License: GPL2
