@@ -182,23 +182,27 @@ function na_options_save_meta( $post_id ) {
 add_filter( 'the_title', 'na_ad_post_title');
 function na_ad_post_title ( $title ) {
 
-	global $post;
-	$is_ad = get_post_meta( $post->ID, '_na_ad', true );
+    if ( !is_admin() ) { // so the markup won't display in the admin
 
-    $options = get_option( 'na_options' );
-    $text = $options['na_text'];
+        global $post;
+        $is_ad = get_post_meta( $post->ID, '_na_ad', true );
 
-      // this will only show the indicator within the loop, off for now
-      // if( $title == $post->post_title and !is_page() && $is_ad == 'on' && in_the_loop() ){
+        $options = get_option( 'na_options' );
+        $text = $options['na_text'];
 
-      //   $title = '<span class="native-ad-title">Sponsored</span> ' . $title;
+          // this will only show the indicator within the loop, off for now
+          // if( $title == $post->post_title and !is_page() && $is_ad == 'on' && in_the_loop() ){
 
-      // }
+          //   $title = '<span class="native-ad-title">Sponsored</span> ' . $title;
 
-        if ( !is_page() && $is_ad == 'on' && $title == $post->post_title ) {
+          // }
 
-            $title = '<span class="native-ad-indicator">' . $text . '</span> ' . $title;
-        }
+            if ( !is_page() && $is_ad == 'on' && $title == $post->post_title ) {
+
+                $title = '<span class="native-ad-indicator">' . $text . '</span> ' . $title;
+            }
+    }
+	
 
 
       
@@ -256,4 +260,26 @@ function na_ad_styles() {
 	<?php 
 }
 
+// add user role for Sponsor, who can edit posts and articles, but not delete them
+register_activation_hook( __FILE__, 'na_sponsor_role_create' );
 
+function na_sponsor_role_create() {
+
+    add_role(
+        'na_sponsor',
+        __( 'Sponsor' ),
+        array(
+            'read'          => true,
+            'edit_articles'    => true,
+            'edit_others_articles' => true,
+            'edit_published_articles' => true,
+            'publish_articles' => true,
+            'edit_others_posts' => true,
+            'edit_posts'    => true,
+            'edit_published_posts' => true,
+            'publish_posts' => true,
+            'edit_others_posts' => true,
+            'moderate_comments' => false
+        )
+    );
+}
