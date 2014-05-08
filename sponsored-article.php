@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Native Ad
+ * Plugin Name: Sponsored Article
  * Plugin URI: http://endocreative.com
  * Description: Add native ad functionality to your site by marking posts as sponsored
  * Version: 1.02
@@ -144,9 +144,9 @@ function na_validate_options( $input ) {
 add_action( 'add_meta_boxes', 'na_meta_box_create' );
 function na_meta_box_create() {
 
-	add_meta_box( 'na-options', 'Native Ad Options', 'na_options_function', 'post', 'side', 'high' );
+	add_meta_box( 'na-options', 'Sponsored Article', 'na_options_function', 'post', 'side', 'high' );
 
-    add_meta_box( 'na-options', 'Native Ad Options', 'na_options_function', 'article', 'side', 'high' );
+    add_meta_box( 'na-options', 'Sponsored Article', 'na_options_function', 'article', 'side', 'high' );
 
 }
 
@@ -159,7 +159,7 @@ function na_options_function( $post ) {
 	<table class="form-table">
 		<tr valign="top">
 			<td>
-				<input id="na_ad" class="widefat" type="checkbox" name="na_ad" <?php checked( 'on', $is_ad ); ?> /> <label for="na_ad">This is a native ad</label>
+				<input id="na_ad" class="widefat" type="checkbox" name="na_ad" <?php checked( 'on', $is_ad ); ?> /> <label for="na_ad">This is a sponsored article</label>
 			</td>
 		</tr>
 	</table>
@@ -261,25 +261,25 @@ function na_ad_styles() {
 }
 
 // add user role for Sponsor, who can edit posts and articles, but not delete them
-register_activation_hook( __FILE__, 'na_sponsor_role_create' );
+// register_activation_hook( __FILE__, 'na_sponsor_role_create' );
 
-function na_sponsor_role_create() {
+// function na_sponsor_role_create() {
 
-    add_role(
-        'na_sponsor',
-        __( 'Sponsor' ),
-        array(
-            'read'          => true,
-            'edit_articles'    => true,
-            'edit_others_articles' => true,
-            'edit_published_articles' => true,
-            'publish_articles' => true,
-            'edit_others_posts' => true,
-            'edit_posts'    => true,
-            'edit_published_posts' => true,
-            'publish_posts' => true,
-            'edit_others_posts' => true,
-            'moderate_comments' => false
-        )
-    );
-}
+//     add_role(
+//         'na_sponsor',
+//         __( 'Sponsor' ),
+//         array(
+//             'read'          => true,
+//             'edit_articles'    => true,
+//             'edit_others_articles' => true,
+//             'edit_published_articles' => true,
+//             'publish_articles' => true,
+//             'edit_others_posts' => true,
+//             'edit_posts'    => true,
+//             'edit_published_posts' => true,
+//             'publish_posts' => true,
+//             'edit_others_posts' => true,
+//             'moderate_comments' => false
+//         )
+//     );
+// }
