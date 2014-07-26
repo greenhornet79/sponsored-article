@@ -190,10 +190,8 @@ function spa_ad_post_title ( $title ) {
         $options = get_option( 'spa_options' );
         $text = $options['spa_text'];
 
-
-
         if ( $is_ad == 'on' && $title == $post->post_title ) {
-            
+
             $title = '<span class="spa-indicator">' . $text . '</span> ' . $title;
         }
     }
