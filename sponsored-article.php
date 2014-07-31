@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Sponsored Article
- * Plugin URI: http://endocreative.com
- * Description: Add native ad functionality to your site by marking posts as sponsored
+ * Plugin URI: http://zeen101.com
+ * Description: Add native ad functionality to your site by marking posts and articles as sponsored
  * Version: 1.02
- * Author: Endo Creative
- * Author URI: http://endocreative.com
+ * Author: Zeen101 Team
+ * Author URI: http://zeen101.com
  * License: GPL2
  */
 
