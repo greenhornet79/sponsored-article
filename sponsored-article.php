@@ -190,7 +190,7 @@ function spa_ad_post_title ( $title ) {
         $options = get_option( 'spa_options' );
         $text = $options['spa_text'];
 
-        if ( $is_ad == 'on' && $title == $post->post_title ) {
+        if ( $is_ad == 'on' && in_the_loop() ) {
 
             $title = '<span class="spa-indicator">' . $text . '</span> ' . $title;
         }
@@ -210,7 +210,8 @@ function spa_ad_post_content ( $content ) {
     if ( !is_page() && $is_ad == 'on' && in_the_loop() ) {
         $content = '<div class="spa-content"> ' . $content. '</div>';
     }
-  return $content;
+    
+    return $content;
 }
 
 // a class to the body element for styling purposes
